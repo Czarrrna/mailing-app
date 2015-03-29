@@ -1,0 +1,9 @@
+<%= form_for @client do |form| %>
+<p><%= form.label("name") %></p>
+  <p><%= form.text_field :name %></p>
+  <p><%= form.label("surname") %></p>
+  <p><%= form.text_field :surname %></p>
+  <p><%= form.label("email") %></p>
+  <p><%= form.text_field :email %></p>
+  <p><%= form.submit %></p>
+<% end %>

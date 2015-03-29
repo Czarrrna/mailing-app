@@ -1,0 +1,17 @@
+<h1>Wpisz wiadomość:</h1>
+<%= form_for @message do |form| %>
+<p><%= form.label("tytuł") %></p>
+  <p><%= form.text_field :title %></p>
+  <% if @message.errors.any? %>
+  <ul>
+    <% @client.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+    <% end %>
+  </ul>
+  <% end %>
+  <p><%= form.label("topic") %></p>
+  <p><%= form.text_field :topic %></p>
+  <p><%= form.label("content") %></p>
+  <p><%= form.text_area :content, class: 'wysihtml5' %></p>
+  <p><%= form.submit %></p>
+<% end %>

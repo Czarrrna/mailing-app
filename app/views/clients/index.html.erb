@@ -1,0 +1,12 @@
+<% @clients.each do |client| %> 
+<p><%= client.name %>, <%= client.email %></p>
+<%= link_to "Edytuj", edit_client_path(client.id), class: "btn btn-success" %></button>
+<%= link_to "Usuń", client_path(client.id), method: :delete, data: {confirm: "Czy jesteś pewien?"}, class: "btn btn-danger" %></button>
+
+
+
+
+
+<% end %>
+<p></p>
+<p><%= link_to "Dodaj użytkownika", new_client_path, class: "btn btn-primary" %></p>
