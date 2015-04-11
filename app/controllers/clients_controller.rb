@@ -45,5 +45,32 @@ class ClientsController < ApplicationController
 		params.require(:client).permit(:name, :surname, :email)
 	end
 
+ # POST /clients
+  # POST /clients.json
+  def create
+    @Client = Client.new(params[:client])
+ 
+    respond_to do |format|
+      if @client.save
+        # Tell the ClientMailer to send a welcome email after save
+        ClientMailer.welcome_email(@client).deliver_later
+ 
+        format.html { redirect_to(@client, notice: "client was successfully created.") }
+        format.json { render json: @client, status: :created, location: @client }
+      else
+        format.html { render action: 'new' }
+        format.json { render json: @client.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+end
+
+class SendWeeklySummary
+  def run
+    Client.find_each do |client|
+      ClientMailer.weekly_summary(user).deliver_now
+    end
+  end
+end
 
 end
